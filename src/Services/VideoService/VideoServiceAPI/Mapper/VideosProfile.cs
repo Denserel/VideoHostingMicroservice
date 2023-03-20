@@ -2,7 +2,7 @@
 using VideoServiceAPI.Models;
 using VideoServiceAPI.Models.Dtos;
 
-namespace VideoServiceAPI.Mapper.Profiles;
+namespace VideoServiceAPI.Mapper;
 
 public class VideosProfile : Profile
 {

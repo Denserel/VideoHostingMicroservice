@@ -5,9 +5,11 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3FA0D794-4D3C-4803-A0C5-81E3E247F5CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoServiceAPI", "Services\VideoService\VideoServiceAPI\VideoServiceAPI.csproj", "{13792598-3501-421A-9D60-0C45286C5E7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoServiceAPI", "Services\VideoService\VideoServiceAPI\VideoServiceAPI.csproj", "{13792598-3501-421A-9D60-0C45286C5E7B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{95C78246-B2C3-44CF-A43C-A15C72754A75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoServiceTests", "Services\VideoService\VideoServiceTests\VideoServiceTests.csproj", "{21E8454A-4E75-4A09-AE17-E0677A395167}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,12 +21,17 @@ Global
 		{13792598-3501-421A-9D60-0C45286C5E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13792598-3501-421A-9D60-0C45286C5E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13792598-3501-421A-9D60-0C45286C5E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21E8454A-4E75-4A09-AE17-E0677A395167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21E8454A-4E75-4A09-AE17-E0677A395167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21E8454A-4E75-4A09-AE17-E0677A395167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21E8454A-4E75-4A09-AE17-E0677A395167}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{13792598-3501-421A-9D60-0C45286C5E7B} = {3FA0D794-4D3C-4803-A0C5-81E3E247F5CE}
+		{21E8454A-4E75-4A09-AE17-E0677A395167} = {95C78246-B2C3-44CF-A43C-A15C72754A75}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD8900BE-AC2B-4B74-9958-7DC387649EC6}

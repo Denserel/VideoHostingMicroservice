@@ -32,6 +32,8 @@ public static class VideoEndpoints
     {
         var videoModel = mapper.Map<VideoModel>(videoCreat);
 
+        // TODO Upload to AzureBlobStorage
+
         await repository.CreateVideoAsync(videoModel);
         await repository.SaveChangesAsync();
 

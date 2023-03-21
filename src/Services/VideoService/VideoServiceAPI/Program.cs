@@ -6,8 +6,7 @@ using System.Runtime.CompilerServices;
 using VideoServiceAPI;
 using VideoServiceAPI.Data;
 using VideoServiceAPI.Data.Repositories;
-using VideoServiceAPI.Models;
-using VideoServiceAPI.Models.Dtos;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

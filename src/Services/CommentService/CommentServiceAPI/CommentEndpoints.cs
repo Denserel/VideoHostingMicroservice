@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Server.IIS.Core;
+﻿using CommentServiceAPI.Data.Repositories;
+using CommentServiceAPI.Models;
+using Microsoft.AspNetCore.Server.IIS.Core;
 using System.Runtime.CompilerServices;
 
 namespace CommentServiceAPI;
@@ -15,23 +17,44 @@ public static class CommentEndpoints
         return group;
     }
 
-    public static async Task<IResult> DeleteComment(int id)
+    public static async Task<IResult> GetCommentsOfContent(ICommentRepository repository, string contentId)
     {
-        throw new NotImplementedException();
+        return TypedResults.Ok(await repository.GetCommentsOfContentAsync(contentId));
     }
 
-    public static async Task<IResult> UpdateComment(int id)
+    public static async Task<IResult> CreateComment(ICommentRepository repository, CommentModel comment)
     {
-        throw new NotImplementedException();
+        await repository.CreateCommentAsync(comment);
+        return TypedResults.Created(string.Empty, comment);
     }
 
-    public static async Task<IResult> CreateComment()
+    public static async Task<IResult> UpdateComment(ICommentRepository repository, CommentModel updateComment, string id)
     {
-        throw new NotImplementedException();
+        var comment = await repository.GetCommentByIdAsync(id);
+
+        if (comment == null)
+        {
+            return TypedResults.NotFound();
+        }
+
+        updateComment.Id = comment.Id;
+
+        await repository.UpdateCommentAsync(updateComment, id);
+
+        return TypedResults.NoContent();
     }
 
-    public static async Task<IResult> GetCommentsOfContent(int contentId)
+    public static async Task<IResult> DeleteComment(ICommentRepository repository, string id)
     {
-        throw new NotImplementedException();
+        var comment = await repository.GetCommentByIdAsync(id);
+
+        if (comment == null)
+        {
+            return TypedResults.NotFound();
+        }
+
+        await repository.DeletCommentAsync(id);
+        
+        return TypedResults.NoContent();
     }
 }

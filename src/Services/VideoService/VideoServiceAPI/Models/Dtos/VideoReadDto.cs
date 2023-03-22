@@ -10,7 +10,7 @@ public class VideoReadDto
     public string Title { get; set; } = string.Empty;
     public string? Description { get; set; }
     public DateTime DateCreated { get; set; } = DateTime.UtcNow;
-    public DateTime DateLastEdit { get; set; } = DateTime.UtcNow;
+    public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
 
     public static Faker<VideoReadDto> BogusVideoReadDto { get; } = new Faker<VideoReadDto>()
         .RuleFor(video => video.Id, fake => fake.Random.Number())

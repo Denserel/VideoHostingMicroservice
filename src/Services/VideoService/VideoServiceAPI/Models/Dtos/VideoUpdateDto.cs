@@ -10,7 +10,7 @@ public class VideoUpdateDto
     [Required]
     public string Title { get; set; } = string.Empty;
     public string? Description { get; set; }
-    public DateTime DateLastEdit { get; set; } = DateTime.UtcNow;
+    public DateTime DateUpdated { get; set; } = DateTime.UtcNow;
 
     public static Faker<VideoUpdateDto> BogusVideoUpdateDto { get; } = new Faker<VideoUpdateDto>()
         .RuleFor(video => video.Url, fake => fake.Internet.Url())

@@ -1,4 +1,6 @@
 using CommentServiceAPI;
+using CommentServiceAPI.Data;
+using CommentServiceAPI.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<CommentDatabaseSettings>(
+    builder.Configuration.GetSection("CommentDatabase"));
+
+builder.Services.AddSingleton<ICommentRepository, CommentRepository>();
 
 var app = builder.Build();
 

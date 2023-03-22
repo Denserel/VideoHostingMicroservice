@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAggregator", "APIGateway
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommentServiceAPI", "Services\CommentService\CommentServiceAPI\CommentServiceAPI.csproj", "{A14910F9-766F-4CC0-98C3-EE43026193FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommentServiceTests", "Services\CommentService\CommentServiceTests\CommentServiceTests.csproj", "{304FCE8B-B3BE-471B-BA11-B4F478B116B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A14910F9-766F-4CC0-98C3-EE43026193FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A14910F9-766F-4CC0-98C3-EE43026193FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A14910F9-766F-4CC0-98C3-EE43026193FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{304FCE8B-B3BE-471B-BA11-B4F478B116B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{304FCE8B-B3BE-471B-BA11-B4F478B116B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{304FCE8B-B3BE-471B-BA11-B4F478B116B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{304FCE8B-B3BE-471B-BA11-B4F478B116B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{21E8454A-4E75-4A09-AE17-E0677A395167} = {95C78246-B2C3-44CF-A43C-A15C72754A75}
 		{9932CC4C-517C-488E-90A6-70352B5F9E5A} = {4D6030C7-F186-4041-B35A-1DD2527A5AC0}
 		{A14910F9-766F-4CC0-98C3-EE43026193FA} = {3FA0D794-4D3C-4803-A0C5-81E3E247F5CE}
+		{304FCE8B-B3BE-471B-BA11-B4F478B116B1} = {95C78246-B2C3-44CF-A43C-A15C72754A75}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD8900BE-AC2B-4B74-9958-7DC387649EC6}

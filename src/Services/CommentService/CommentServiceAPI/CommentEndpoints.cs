@@ -25,36 +25,29 @@ public static class CommentEndpoints
     public static async Task<IResult> CreateComment(ICommentRepository repository, CommentModel comment)
     {
         await repository.CreateCommentAsync(comment);
-        return TypedResults.Created(string.Empty, comment);
+        return TypedResults.Created(" ", comment);
     }
 
     public static async Task<IResult> UpdateComment(ICommentRepository repository, CommentModel updateComment, string id)
     {
-        var comment = await repository.GetCommentByIdAsync(id);
-
-        if (comment == null)
+        if (await repository.GetCommentByIdAsync(id) is CommentModel comment)
         {
-            return TypedResults.NotFound();
+            updateComment.Id = comment.Id;
+            await repository.UpdateCommentAsync(updateComment, id);
+            return TypedResults.NoContent();
         }
 
-        updateComment.Id = comment.Id;
-
-        await repository.UpdateCommentAsync(updateComment, id);
-
-        return TypedResults.NoContent();
+        return TypedResults.NotFound();
     }
 
     public static async Task<IResult> DeleteComment(ICommentRepository repository, string id)
     {
-        var comment = await repository.GetCommentByIdAsync(id);
-
-        if (comment == null)
+        if (await repository.GetCommentByIdAsync(id) is CommentModel comment)
         {
-            return TypedResults.NotFound();
+            await repository.DeletCommentAsync(id);
+            return TypedResults.Ok(comment);
         }
 
-        await repository.DeletCommentAsync(id);
-        
-        return TypedResults.NoContent();
+        return TypedResults.NotFound();
     }
 }

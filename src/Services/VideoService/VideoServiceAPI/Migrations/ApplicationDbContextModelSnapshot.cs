@@ -49,7 +49,7 @@ namespace VideoServiceAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Videos");
+                    b.ToTable("Videos", (string)null);
                 });
 #pragma warning restore 612, 618
         }

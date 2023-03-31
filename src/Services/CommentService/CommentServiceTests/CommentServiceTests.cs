@@ -1,6 +1,9 @@
-﻿using CommentServiceAPI;
+﻿using AutoMapper;
+using CommentServiceAPI;
 using CommentServiceAPI.Data.Repositories;
+using CommentServiceAPI.Mapper;
 using CommentServiceAPI.Models;
+using CommentServiceAPI.Models.Dtos;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
 using System;
@@ -13,6 +16,17 @@ namespace CommentServiceTests;
 public class CommentServiceTests
 {
     private readonly Mock<ICommentRepository> mockCommentRepository = new Mock<ICommentRepository>();
+    private readonly IMapper mapper;
+
+    public CommentServiceTests()
+    {
+        var mockMapper = new MapperConfiguration(configuration =>
+        {
+            configuration.AddProfile(new CommentsProfile());
+        });
+
+        mapper = mockMapper.CreateMapper();
+    }
 
     [Fact]
     public async Task GetCommentsOfContent_ReturnsOkWithComments ()
@@ -22,11 +36,11 @@ public class CommentServiceTests
         mockCommentRepository.Setup(repository => 
             repository.GetCommentsOfContentAsync(It.IsAny<string>())).ReturnsAsync(bogusComments);
 
-        var result = (Ok<List<CommentModel>>)await CommentEndpoints.GetCommentsOfContent(mockCommentRepository.Object, It.IsAny<string>());
+        var result = (Ok<List<ReadCommentDto>>)await CommentEndpoints.GetCommentsOfContent(mockCommentRepository.Object, mapper, It.IsAny<string>());
 
         Assert.Equal(200, result.StatusCode);
 
-        var list = Assert.IsAssignableFrom<List<CommentModel>>(result.Value);
+        var list = Assert.IsAssignableFrom<List<ReadCommentDto>>(result.Value);
 
         Assert.Equal(3, list.ToList().Count);
     }
@@ -34,11 +48,9 @@ public class CommentServiceTests
     [Fact]
     public async Task CreateComment_ReturnsCreatedComment()
     {
-        var bogusComment = CommentModel.BogusCommentModel.Generate();
+        mockCommentRepository.Setup(repository => repository.CreateCommentAsync(It.IsAny<CommentModel>())).Verifiable();
 
-        mockCommentRepository.Setup(repository => repository.CreateCommentAsync(bogusComment)).Verifiable(); ;
-
-        var result = (Created<CommentModel>)await CommentEndpoints.CreateComment(mockCommentRepository.Object, bogusComment);
+        var result = (Created<CommentModel>)await CommentEndpoints.CreateComment(mockCommentRepository.Object, mapper, It.IsAny<CreateCommentDto>());
 
         Assert.Equal(201, result.StatusCode);
         mockCommentRepository.Verify();
@@ -47,11 +59,9 @@ public class CommentServiceTests
     [Fact]
     public async Task UpdateComment_WithNoKnownId_ReturnsNotFound()
     {
-        var bogusComment = CommentModel.BogusCommentModel.Generate();
-
         mockCommentRepository.Setup(repository => repository.GetCommentByIdAsync(It.IsAny<string>()));
 
-        var result = (NotFound)await CommentEndpoints.UpdateComment(mockCommentRepository.Object, bogusComment, It.IsAny<string>());
+        var result = (NotFound)await CommentEndpoints.UpdateComment(mockCommentRepository.Object, mapper, It.IsAny<UpdateCommentDto>(), It.IsAny<string>());
 
         Assert.Equal(404, result.StatusCode);
     }
@@ -65,7 +75,7 @@ public class CommentServiceTests
         mockCommentRepository.InSequence(sequence).Setup(repository => repository.GetCommentByIdAsync(It.IsAny<string>())).ReturnsAsync(bogusComment);
         mockCommentRepository.InSequence(sequence).Setup(repository => repository.UpdateCommentAsync(bogusComment, It.IsAny<string>())).Verifiable();
 
-        var result = (NoContent)await CommentEndpoints.UpdateComment(mockCommentRepository.Object, bogusComment, It.IsAny<string>());
+        var result = (NoContent)await CommentEndpoints.UpdateComment(mockCommentRepository.Object, mapper, It.IsAny<UpdateCommentDto>(), It.IsAny<string>());
 
         Assert.Equal(204, result.StatusCode);
         mockCommentRepository.Verify();

@@ -21,7 +21,7 @@ namespace VideoServiceAPI.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateLastEdit = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

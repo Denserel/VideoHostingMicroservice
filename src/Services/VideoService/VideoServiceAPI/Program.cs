@@ -26,6 +26,13 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
+// Adds the migration to the databas on statup if it dosnt exist
+using (var serviceScope = app.Services.CreateScope())
+{
+    var applicationDbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    applicationDbContext.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

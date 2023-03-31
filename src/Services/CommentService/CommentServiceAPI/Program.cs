@@ -1,3 +1,4 @@
+using AutoMapper;
 using CommentServiceAPI;
 using CommentServiceAPI.Data;
 using CommentServiceAPI.Data.Repositories;
@@ -9,10 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<CommentDatabaseSettings>(
-    builder.Configuration.GetSection("CommentDatabase"));
+builder.Services.Configure<CommentDatabaseSettings>(builder.Configuration.GetSection("CommentDatabase"));
 
 builder.Services.AddSingleton<ICommentRepository, CommentRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

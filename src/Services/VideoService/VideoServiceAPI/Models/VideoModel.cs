@@ -21,6 +21,3 @@ public class VideoModel
         .RuleFor(video => video.Title, fake => fake.Random.Word())
         .RuleFor(video => video.Description, fake => fake.Random.Words());
 }
-
-
-

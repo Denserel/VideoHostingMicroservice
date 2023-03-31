@@ -25,7 +25,8 @@ public static class VideoEndpoints
 
     public static async Task<IResult> GetVideo(IVideoRepository repository, IMapper mapper, int id)
     {
-        return await repository.GetVideoByIdAsync(id) is VideoModel video ? TypedResults.Ok(mapper.Map<VideoReadDto>(video)) : TypedResults.NotFound();
+        return await repository.GetVideoByIdAsync(id) is VideoModel video ? 
+            TypedResults.Ok(mapper.Map<VideoReadDto>(video)) : TypedResults.NotFound();
     }
 
     public static async Task<IResult> CreateVideo(IVideoRepository repository, IMapper mapper, VideoCreatDto videoCreat)
